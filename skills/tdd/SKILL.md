@@ -61,19 +61,25 @@ Ask: "What should the public interface look like? Which behaviors are most impor
 Write ONE test that confirms ONE thing about the system:
 
 ```
-RED:   Write test for first behavior → test fails
-GREEN: Write minimal code to pass → test passes
+RED:    Write test for first behavior → test fails
+GREEN:  Write minimal code to pass → test passes
+VERIFY: Run project lint + full test suite → must pass
+COMMIT: Atomic commit (conventional commits v1)
 ```
 
 This is your tracer bullet — proves the path works end-to-end.
+
+**Do not proceed if lint or tests fail.** Fix first.
 
 ## Step 3: Incremental Loop
 
 For each remaining behavior:
 
 ```
-RED:   Write next test → fails
-GREEN: Minimal code to pass → passes
+RED:    Write next test → fails
+GREEN:  Minimal code to pass → passes
+VERIFY: Lint + tests → must pass
+COMMIT: Atomic commit
 ```
 
 Rules:
@@ -82,6 +88,8 @@ Rules:
 - Only enough code to pass current test
 - Don't anticipate future tests
 - Keep tests focused on observable behavior
+- Never proceed past a failing lint or test — fix before moving on
+- One commit per cycle — never batch unrelated changes
 
 ## Step 4: Refactor
 
@@ -98,6 +106,13 @@ After all tests pass, look for refactor candidates:
 
 **Never refactor while RED.** Get to GREEN first.
 
+## Step 5: Completion
+
+After all acceptance criteria met and all checks pass:
+
+- Print `## Manual Testing Checklist` with concrete steps to verify manually (if applicable)
+- Stop
+
 # Per-Cycle Checklist
 
 ```
@@ -106,6 +121,8 @@ After all tests pass, look for refactor candidates:
 [ ] Test would survive internal refactor
 [ ] Code is minimal for this test
 [ ] No speculative features added
+[ ] Lint + tests pass
+[ ] Atomic commit made (conventional commits v1)
 ```
 
 # References
